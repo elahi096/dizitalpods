@@ -506,13 +506,14 @@
 		function GetBindData() {
 			/* var search = document.getElementById('takenvalue').value.toString().slice(0,15);
 			console.log('djwhfbhhrfuf',search);*/
-
+		/* $('#caldata').load('#caldata > #caldata') */
 			$.ajax({
 				url : "/cal/interviewschedule/" + $('#takenvalue').val(),
 				method : 'GET',
 				dataType : 'json',
 				contentType : 'application/json; charset=utf-8',
 				success : function(result) {
+					
 					BindDataWithJqueryEach(result);
 				},
 				fail : function(jqXHR, textStatus) {
@@ -522,6 +523,7 @@
 		}
 
 		function BindDataWithJqueryEach(data) {
+			$('#caldata').html("");
 			jQuery
 					.each(
 							data,
@@ -529,15 +531,17 @@
 								var resp = '';
 								resp += '<div class=" meet d-flex align-items-center px-4 py-2 my-3">'
 								resp += '<span class="w-20" id="tid" value = "'+ data.scheduleId +'"></span>'
-								resp += '<span class="w-50">' + data.task
+								resp += '<span class="col-6">' + data.task
 										+ '</span>'
-								resp += '<span>' + data.category + '</span>'
-								resp += '<span class="ml-4">' + data.time
+								resp += '<span class="col-2">' + data.category + '</span>'
+								resp += '<span class="col-2">' + data.time
 										+ '</span>'
-								resp += '<span class="ml-4"><a href="" class="text-gray-500"><i class="fa-solid fa-pen"></i> </a></span> '
-								resp += '<span class="ml-4"><a href="" class="text-gray-500" onclick="del();"><i class="fa-solid fa-trash-can"></i></a></span>';
+								resp += '<span class="col-1"><a href="" class="text-gray-500"><i class="fa-solid fa-pen"></i> </a></span> '
+								resp += '<span class="col-1"><a href="" class="text-gray-500" onclick="del();"><i class="fa-solid fa-trash-can"></i></a></span>';
 								resp += '</div>'
+									
 								$("#caldata").append(resp);
+								
 							});
 		}
 	
