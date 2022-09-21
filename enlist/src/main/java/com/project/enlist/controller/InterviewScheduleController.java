@@ -56,7 +56,7 @@ public class InterviewScheduleController
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	@DeleteMapping("/cal/interviewschedule/{scheduleId}")
+	@DeleteMapping("/cal/interviewschedule/{scheduleId}" )
 	public void delete(@PathVariable int scheduleId) 
 	{
 		serv.delete(scheduleId);

@@ -64,6 +64,7 @@
 			success : function(data) {
 				alert("Added Successfully" + data);
 				window.location.href = 'localhost:8080/calendar';
+				GetBindData();
 			},
 			error : function(e) {
 				alert('error', e);
@@ -530,14 +531,14 @@
 							function(i, data) {
 								var resp = '';
 								resp += '<div class=" meet d-flex align-items-center px-4 py-2 my-3">'
-								resp += '<span class="w-20" id="tid" value = "'+ data.scheduleId +'"></span>'
+								resp += '<span class="w-20" id="tid" value ='+ data.scheduleId +'></span>'
 								resp += '<span class="col-6">' + data.task
 										+ '</span>'
 								resp += '<span class="col-2">' + data.category + '</span>'
 								resp += '<span class="col-2">' + data.time
 										+ '</span>'
-								resp += '<span class="col-1"><a href="" class="text-gray-500"><i class="fa-solid fa-pen"></i> </a></span> '
-								resp += '<span class="col-1"><a href="" class="text-gray-500" onclick="del();"><i class="fa-solid fa-trash-can"></i></a></span>';
+								resp += '<span class="col-1"><p class="text-gray-500"><i class="fa-solid fa-pen"></i> </p></span> '
+								resp += '<span class="col-1"><p class="text-gray-500"><i class="fa-solid fa-trash-can" onclick="del('+ data.scheduleId +');" ></i></p></span>';
 								resp += '</div>'
 									
 								$("#caldata").append(resp);
@@ -545,22 +546,19 @@
 							});
 		}
 	
-	function del() {
-		
-		var v=$("#tid").value();
-		console.log(v);
+	function del(id) {
+
 		var c = confirm("are you sure to delete the record?");
 		if (c == true) {
 			$.ajax({
 				type : 'DELETE',
-				url : "/cal/interviewschedule/16",
+				url : "/cal/interviewschedule/"+id,
 				contentType:"application/json",
 				success : function(response, status) {
 					console.log(status);
 					alert("Successfully Deleted");
-				window.location.href="/CandidateDisplay";
-					
-					
+				GetBindData();
+	
 				}
 			})
 		}
