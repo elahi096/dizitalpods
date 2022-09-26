@@ -297,16 +297,8 @@
 
                                                                     </ul>
                                                                 </div>
-                                                                <div class="value-wrap">
-                                                                    <ul>
-                                                                        <li>Adobe</li>
-                                                                        <li>112</li>
-                                                                        <li>Suman</li>
-                                                                        <li>100</li>
-                                                                        <li>Java,DSA,HTML,CSS,git,c,react,bootstrap,angular</li>
-                                                                        <li>1</li>
-                                                                        <li>21,Sept 2022</li>
-                                                                    </ul>
+                                                                <div class="value-wrap" id="listdata">
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -620,6 +612,50 @@
             </div>
         </div>
     </div>
+    
+    
+    
+    
+    
+    <script>
+
+function GetBindData() {
+      $.ajax({
+          url: '/job/100',
+          method: 'GET',
+          dataType: 'json',
+          contentType: 'application/json; charset=utf-8',
+          success: function (result)
+          {
+              //after successfully call bind data to Table
+              BindDataWithJqueyEach(result);
+          },
+          fail: function (jqXHR, textStatus) {
+              alert("Request failed: " + textStatus);
+          }
+      })
+  }
+   
+  function BindDataWithJqueyEach(data)
+  {
+      jQuery.each(data, function (i, val) {
+          var ldata = "<ul>"
+        	  			   + "<li>" + val.clientname + "</li>"                 
+          				   + "<li>" + val.jobid + "</li>"
+                           + "<li>" + val.assignedby + "</li>"
+                           + "<li>" + val.openpositions + "</li>"
+                           + "<li>" + val.techskills + "</li>"
+                           + "<li>" + val.exprange + "</li>"
+                           + "<li>" + val.joinedby + "</li>"
+                           + "</ul>";
+                           console.log(ldata);
+          $("#listdata").append(ldata);
+      });
+  } 
+ 
+</script>
+ 
+    
     <!-- Bootstrap core JavaScript-->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
@@ -628,7 +664,7 @@
     <script src="js/jquery.easing.js"></script>
 
     <!-- Custom scripts for all pages-->
-   <!--  <script src="js/custom.js"></script> -->
+   <script src="js/custom.js"></script>
 
 </body>
 
