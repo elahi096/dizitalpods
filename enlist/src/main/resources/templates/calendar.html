@@ -505,9 +505,6 @@
 			
 		});
 		function GetBindData() {
-			/* var search = document.getElementById('takenvalue').value.toString().slice(0,15);
-			console.log('djwhfbhhrfuf',search);*/
-		/* $('#caldata').load('#caldata > #caldata') */
 			$.ajax({
 				url : "/cal/interviewschedule/" + $('#takenvalue').val(),
 				method : 'GET',
@@ -515,7 +512,7 @@
 				contentType : 'application/json; charset=utf-8',
 				success : function(result) {
 					
-					BindDataWithJqueryEach(result);
+					BindDataWithJqueryEach();
 				},
 				fail : function(jqXHR, textStatus) {
 					alert("Request failed: " + textStatus);
@@ -525,10 +522,7 @@
 
 		function BindDataWithJqueryEach(data) {
 			$('#caldata').html("");
-			jQuery
-					.each(
-							data,
-							function(i, data) {
+			jQuery.each(data,function(i, data) {
 								var resp = '';
 								resp += '<div class=" meet d-flex align-items-center px-4 py-2 my-3">'
 								resp += '<span class="w-20" id="tid" value ='+ data.scheduleId +'></span>'
@@ -575,7 +569,7 @@
 		integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
 		crossorigin=" anonymous" referrerpolicy="no-referrer "></script>
 	<!-- Custom scripts for all pages-->
-	<!-- <script src="../js/custom.js "></script> -->
+	 <script src="../js/custom.js "></script>
 	<!-- <script src="js/calendar.js"></script> -->
 
 </body>

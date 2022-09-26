@@ -50,44 +50,14 @@ function GetData() {
   function BindDataWithJqueyEach(data)
   {
       jQuery.each(data, function (i, val) {
-          var tablerow = "<tr class='clickable-row' data-href='candidateProfile'>"
-                        + "<td><img src='https://mdbootstrap.com/img/new/avatars/8.jpg'  style='width: 45px; height: 45px'  class=rounded-circle> </td>" 
+          var tablerow = "<tr class='clickable-row' data-href='/candidateP'>"
+                       	+ "<td><img src='https://mdbootstrap.com/img/new/avatars/8.jpg'  style='width: 45px; height: 45px'  class=rounded-circle> </td>" 
                            + "<td>" + val.fname +" "+ val.lname + "</td>"
                            + "<td>" + val.rolename + "</td>"
                            + "<td>" + val.appliedon + "</td>"
                            + "<td>" + val.lockedstatus + "</td>"
                            + "<td>" + val.clientname + "</td>"
-		   			 $(document).ready(function () {
-		   			    GetJobData()
-		   			});
-		   			function GetJobData() {
-		   			    $.ajax({
-		   			        url: '/job',
-		   			        method: 'GET',
-		   			        dataType: 'json',
-		   			        contentType: 'application/json; charset=utf-8',
-		   			        success: function (result)
-		   			        {
-		   			            //after successfully call bind data to Table
-		   			            BindDataWithJqueyEachJob(result);
-		   			        },
-		   			        fail: function (jqXHR, textStatus) {
-		   			            alert("Request failed: " + textStatus);
-		   			        }
-		   			    })
-		   			}
-		   		  
-		   			  function BindDataWithJqueyEachJob(data1)
-		   			  {
-		   			      jQuery.each(data1, function (i, value) {
-		   			          var tablerow = "<tr>"
-		   			                       + "<td>" + value.rolename+ "</td>"
-		   			                           +"<td>"+value.appliedon+"<td>"
-		   			                           +"<td>"+value.clientname+"<td>"
-		   			                           + "</tr>";
-		   			      });
-		   			  }
-                           + "</tr>";
+                           +"</tr>"
           $("#tbody").append(tablerow);
       });
   } 

@@ -94,4 +94,9 @@ public class IndexController {
 	{
 		return "RoleScreen";
 	}
+	@RequestMapping("/candidateP")
+	public String cP()
+	{
+		return "candidateProfile";
+	}
 }
