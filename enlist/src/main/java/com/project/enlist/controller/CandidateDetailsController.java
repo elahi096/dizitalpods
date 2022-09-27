@@ -26,6 +26,11 @@ public List<CandidateDetailsDomain> listAll()
 {
 	return service.listAll();
 }
+@GetMapping("/candidate/lock/{lockedstatus}")
+public List<CandidateDetailsDomain> listLocked(@PathVariable String lockedstatus) 
+{
+	return service.findByLocked(lockedstatus);
+}
 
 @GetMapping("/candidate/{cno}")
 public CandidateDetailsDomain getTask (@PathVariable long cno)

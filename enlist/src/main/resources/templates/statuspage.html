@@ -40,10 +40,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 		$(document).ready(function() {
+			getInfo()
+			GetData()
 		});
 		function GetBindData() {
 			$.ajax({
-				url : '/job',
+				url : '/job/101',
 				method : 'GET',
 				dataType : 'json',
 				contentType : 'application/json; charset=utf-8',
@@ -59,8 +61,7 @@
 		function BindDataWithJqueyEach(data) {
 			console.log("sbchjzxvchz");
 			jQuery.each(data, function(i, val) {
-				var ldata = '';
-					ldata += '<ul>'
+				var ldata = '<ul>'
 					ldata += '<li>' + val.clientname + '</li>'
 					ldata += '<li>' + val.jobid + '</li>'
 					ldata += '<li>' + val.assignedby + '</li>'
@@ -73,6 +74,77 @@
 				console.log('fytytyu'+ldata);
 			});
 		}
+
+		
+		function getInfo(){
+		    var search=$(".search").val();
+		    $.ajax(
+		    	{
+		    		url:"/job/101",
+		    		success:function(val)
+		    		{
+		    			console.log("search data");
+		    			var ldata = '<ul>'
+							ldata += '<li>' + val.clientname + '</li>'
+							ldata += '<li>' + val.jobid + '</li>'
+							ldata += '<li>' + val.assignedby + '</li>'
+							ldata += '<li>' + val.openpositions + '</li>'
+							ldata += '<li>' + val.techskills + '</li>'
+							ldata += '<li>' + val.exprange + '</li>'
+							ldata += '<li>' + val.joinedby + '</li>'
+							ldata += '</ul>';
+						$('#listdata').append(ldata);
+		    		},
+		    		type:'GET' 
+		    	});
+		    }
+		
+		
+		
+		
+		
+		
+		function GetData() {
+		    $.ajax({
+		        url: '/candidate/',
+		        method: 'GET',
+		        dataType: 'json',
+		        contentType: 'application/json; charset=utf-8',
+		        success: function (result)
+		        {
+		            //after successfully call bind data to Table
+		            BindDataWithJqueyEach(result);
+		        },
+		        fail: function (jqXHR, textStatus) {
+		            alert("Request failed: " + textStatus);
+		        }
+		    })
+		}
+		   
+		  function BindDataWithJqueyEach(data)
+		  {
+		      jQuery.each(data, function (i, val) {
+		          var tablerow = "<tr class='text-center'> <td class='clickable-row' data-href='candidate_profile.html'>"
+					
+		        	  tablerow += "<div class='d-flex align-items-center justify-content-center'>"
+		        	 tablerow +="<img src='https://mdbootstrap.com/img/new/avatars/8.jpg' alt='' style='width: 45px; height: 45px' class='rounded-circle' />"
+		        	tablerow +="</div></td>"
+				 tablerow +="<td class='clickable-row' data-href='candidate_profile.html'>"+val.fname+" "+val.lname+"</td>"
+		        tablerow +="<td class='clickable-row' data-href='candidate_profile.html'>"+val.department+"</td>"
+		        tablerow +="<td class='clickable-row' data-href='candidate_profile.html'>"+val.appliedon+"</td>"
+		        tablerow +="<td class='clickable-row' data-href='candidate_profile.html'>Interview</td>"
+		        	tablerow +="<td class='clickable-row' data-href='candidate_profile.html'> "+val.clientname+" </td>"
+		        		tablerow +="<td><label class='switch'> <input type='checkbox'> <span class='slider round'></span>"
+		        		tablerow +="</label></td>"
+		        			tablerow +="</tr>"
+				
+		          $("#tbody").append(tablerow);
+		      });
+		  } 
+
+		
+		
+		
 	</script>
 
 
@@ -450,212 +522,8 @@
 															<th>Lock</th>
 														</tr>
 													</thead>
-													<tbody class="statuspage-table">
-														<tr class="text-center">
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>
-																<div
-																	class="d-flex align-items-center justify-content-center">
-																	<img
-																		src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-																		alt="" style="width: 45px; height: 45px"
-																		class="rounded-circle" />
-																</div>
-															</td>
-															<td class='clickable-row'
-																data-href='/CandidateProfile'>Sumanth Sai</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Java Developer</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>12 Jan</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Interview</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Adobe</td>
-															<td><label class="switch"> <input
-																	type="checkbox"> <span class="slider round"></span>
-															</label></td>
-														</tr>
-														<tr class="text-center">
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>
-																<div
-																	class="d-flex align-items-center justify-content-center">
-																	<img
-																		src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-																		alt="" style="width: 45px; height: 45px"
-																		class="rounded-circle" />
-																</div>
-															</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Sumanth Sai</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Java Developer</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>12 Jan</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Interview</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Adobe</td>
-															<td><label class="switch"> <input
-																	type="checkbox"> <span class="slider round"></span>
-															</label></td>
-														</tr>
-														<tr class="text-center">
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>
-																<div
-																	class="d-flex align-items-center justify-content-center">
-																	<img
-																		src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-																		alt="" style="width: 45px; height: 45px"
-																		class="rounded-circle" />
-																</div>
-															</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Sumanth Sai</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Java Developer</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>12 Jan</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Interview</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Adobe</td>
-															<td><label class="switch"> <input
-																	type="checkbox"> <span class="slider round"></span>
-															</label></td>
-														</tr>
-														<tr class="text-center">
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>
-																<div
-																	class="d-flex align-items-center justify-content-center">
-																	<img
-																		src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-																		alt="" style="width: 45px; height: 45px"
-																		class="rounded-circle" />
+													<tbody class="statuspage-table" id="tbody">														
 
-																</div>
-															</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Sumanth Sai</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Java Developer</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>12 Jan</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Interview</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Adobe</td>
-															<td><label class="switch"> <input
-																	type="checkbox"> <span class="slider round"></span>
-															</label></td>
-														</tr>
-														<tr class="text-center">
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>
-																<div
-																	class="d-flex align-items-center justify-content-center">
-																	<img
-																		src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-																		alt="" style="width: 45px; height: 45px"
-																		class="rounded-circle" />
-
-																</div>
-															</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Sumanth Sai</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Java Developer</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>12 Jan</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Interview</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Adobe</td>
-															<td><label class="switch"> <input
-																	type="checkbox"> <span class="slider round"></span>
-															</label></td>
-														</tr>
-														<tr class="text-center">
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>
-																<div
-																	class="d-flex align-items-center justify-content-center">
-																	<img
-																		src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-																		alt="" style="width: 45px; height: 45px"
-																		class="rounded-circle" />
-
-																</div>
-															</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Sumanth Sai</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Java Developer</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>12 Jan</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Interview</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Adobe</td>
-															<td><label class="switch"> <input
-																	type="checkbox"> <span class="slider round"></span>
-															</label></td>
-														</tr>
-														<tr class="text-center">
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>
-																<div
-																	class="d-flex align-items-center justify-content-center">
-																	<img
-																		src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-																		alt="" style="width: 45px; height: 45px"
-																		class="rounded-circle" />
-
-																</div>
-															</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Sumanth Sai</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Java Developer</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>12 Jan</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Interview</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Adobe</td>
-															<td><label class="switch"> <input
-																	type="checkbox"> <span class="slider round"></span>
-															</label></td>
-														</tr>
-														<tr class="text-center">
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>
-																<div
-																	class="d-flex align-items-center justify-content-center">
-																	<img
-																		src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-																		alt="" style="width: 45px; height: 45px"
-																		class="rounded-circle" />
-
-																</div>
-															</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Sumanth Sai</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Java Developer</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>12 Jan</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Interview</td>
-															<td class='clickable-row'
-																data-href='candidate_profile.html'>Adobe</td>
-															<td><label class="switch"> <input
-																	type="checkbox"> <span class="slider round"></span>
-															</label></td>
-														</tr>
 													</tbody>
 												</table>
 											</div>

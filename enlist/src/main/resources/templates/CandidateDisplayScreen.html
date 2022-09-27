@@ -12,8 +12,7 @@
     <link rel="icon" type="image/x-icon" href="images/tab.png">
     <title>Enlist - Candidates</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -29,10 +28,11 @@
 
 $(document).ready(function () {
     GetData()
+    GetDataLocked()
 });
 function GetData() {
     $.ajax({
-        url: '/candidate',
+        url: '/candidate/',
         method: 'GET',
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -62,7 +62,41 @@ function GetData() {
       });
   } 
 
-  </script>
+
+function GetDataLocked() {
+    $.ajax({
+        url: '/candidate/lock/Locked',
+        method: 'GET',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (result)
+        {
+            //after successfully call bind data to Table
+            BindDataWithJqueyEachLocked(result);
+        },
+        fail: function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        }
+    })
+}
+   
+  function BindDataWithJqueyEachLocked(data)
+  {
+      jQuery.each(data, function (i, val) {
+          var tablerow = "<tr class='clickable-row' data-href='/candidateP'>"
+                       	+ "<td><img src='https://mdbootstrap.com/img/new/avatars/8.jpg'  style='width: 45px; height: 45px'  class=rounded-circle> </td>" 
+                           + "<td>" + val.fname +" "+ val.lname + "</td>"
+                           + "<td>" + val.rolename + "</td>"
+                           + "<td>" + val.appliedon + "</td>"
+                           + "<td>" + val.lockedstatus + "</td>"
+                           + "<td>" + val.clientname + "</td>"
+                           +"</tr>"
+          $(".lbody").append(tablerow);
+      });
+  } 
+
+  </script>  
+   
 </head>
 
 <body id="page-top">
@@ -358,14 +392,6 @@ function GetData() {
                                                             </tr>
                                                         </thead>
                                                         <tbody  id="tbody" class="candidates-table-styles">
-                                                           
-                   
-                                                            
-                                                           
-                                                            
-                                                          
-
-
 
                                                         </tbody>
                                                     </table>
@@ -387,7 +413,8 @@ function GetData() {
                                                             </tr>
                                                         </thead>
                                                         
-                                                            <tbody  id="tbody"class="candidates-table-styles"> 
+                                                            <tbody  id="lbody"class="candidates-table-styles lbody"> 
+                                                             
                                                              </tbody>
                                                     
                                                     </table>
@@ -408,7 +435,7 @@ function GetData() {
                                                                 <!-- <th>Resume</th> -->
                                                             </tr>
                                                         </thead>
-                                                         <tbody  id="tbody"class="candidates-table-styles">  </tbody>
+                                                         <tbody  id=""class="candidates-table-styles">  </tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -427,7 +454,7 @@ function GetData() {
                                                                 <!-- <th>Resume</th> -->
                                                             </tr>
                                                         </thead>
-                                                         <tbody  id="tbody"class="candidates-table-styles">  </tbody>
+                                                         <tbody  id=""class="candidates-table-styles">  </tbody>
                                                     </table>
                                                 </div>
                                             </div>

@@ -22,8 +22,8 @@
     
     <script>
     function addToDatabase(){
-    	var data={}
     	
+    	var data={}
     	data["jobtitle"]=$(".jobtitle").val();
     	data["domain"]=$(".domain").val();
     	data["jobtype"]=$(".jobtype").val();
@@ -41,7 +41,7 @@
     		url:"/job",
     		contentType: "application/json",
     		data: JSON.stringify(data),
-    		type: "post",
+    		type: 'POST',
     		success: function(data){
     			alert("Added Successfully");
     			window.location.href= '/JobInputScreen';
@@ -475,7 +475,7 @@
     <script src="js/jquery.easing.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Custom scripts for all pages-->
-   <!--  <script src="js/custom.js"></script> -->
+    <script src="js/custom.js"></script>
 
 </body>
 
